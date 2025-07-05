@@ -9,28 +9,36 @@ namespace ProyectoFinal_MVC.Controllers
 {
     public class LoginController : Controller
     {
-        private LoginBL loginBL = new LoginBL();
+        private readonly LoginBL loginBL = new LoginBL();
 
-        // GET: Login
+        // GET: Login/Index (O la página principal de tu aplicación)
         public ActionResult Index()
         {
             return View();
         }
 
 
-        [HttpPost]
-        public JsonResult Autenticar(string usuario, string contrasena)
+        public ActionResult IniciarSesion()
         {
+            return View();
+        }
+
+
+        [HttpPost]
+
+        public JsonResult VerificarCredenciales(string usuario, string contrasena)
+        {
+
             var user = loginBL.VerificarLogin(usuario, contrasena);
             if (user != null)
             {
-                Session["Usuario"] = user;
+                Session["Usuario"] = user; 
                 return Json(new
                 {
                     exito = true,
                     mensaje = "Login correcto",
                     nombre = user.nombre,
-                    perfil = user.idPerfil
+                    perfil = user.idPerfil 
                 });
             }
             else
@@ -42,7 +50,5 @@ namespace ProyectoFinal_MVC.Controllers
                 });
             }
         }
-
-
     }
 }

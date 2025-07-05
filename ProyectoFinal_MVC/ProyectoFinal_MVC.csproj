@@ -97,11 +97,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\DataTables\bootstrap.css" />
+    <Content Include="Content\DataTables\bootstrap.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\DataTables\bootstrap.min.css" />
     <Content Include="Content\DataTables\css\buttons.dataTables.min.css" />
     <Content Include="Content\DataTables\css\jquery.dataTables.min.css" />
     <Content Include="Content\DataTables\css\responsive.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\js\bootstrap.bundle.min.js" />
+    <Content Include="Content\DataTables\js\jquery-3.6.0.min.js" />
+    <Content Include="Content\DataTables\js\sweetalert2%4011.js" />
     <Content Include="Content\DataTables\Site.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
@@ -201,6 +206,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Docente\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Login\IniciarSesion.cshtml" />
+    <Content Include="Views\Usuario\AgregarNuevoUsuario.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -210,14 +217,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Usuario\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CapaEntidad\CapaEntidades.csproj">
-      <Project>{5e30a777-0001-46a8-8878-0a4634bcff40}</Project>
+    <ProjectReference Include="..\CapaEntidades\CapaEntidades.csproj">
+      <Project>{d765de53-ba04-4dc5-9a2d-ecdb1f55c1e2}</Project>
       <Name>CapaEntidades</Name>
     </ProjectReference>
     <ProjectReference Include="..\CapaNegocio\CapaNegocio.csproj">

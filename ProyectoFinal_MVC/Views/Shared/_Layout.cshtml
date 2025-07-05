@@ -1,40 +1,113 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    @* Enlaces a los archivos CSS (Bootstrap 5.3.0, Poppins, Font Awesome) *@
+    <link href="~/Content/DataTables/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" /> @* <-- NUEVO: Font Awesome *@
+
+    @* Tus estilos personalizados de la plantilla maestra *@
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            /* Mantén el degradado del layout, el background del body del login.cshtml no tendrá efecto */
+            background: linear-gradient(135deg, #20b1d9, #066782);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-wrapper {
+            background-color: #ffffff;
+            padding: 60px 50px;
+            width: 100%;
+            max-width: 500px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        .login-wrapper h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #20b1d9;
+            font-weight: 600;
+            font-size: 1.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Estas clases .form-control, .btn-primary etc. de la plantilla anterior,
+           serán sobrescritas por las de login-container si tienen mayor especificidad.
+           Mantendremos las de login-container en el Login.cshtml para respetar el nuevo diseño. */
+        .form-control {
+            margin-bottom: 1rem;
+        }
+
+        .form-control:focus {
+            border-color: #20b1d9;
+            box-shadow: 0 0 0 0.2rem rgba(32, 177, 217, 0.25);
+        }
+
+        .btn-primary {
+            background-color: #20b1d9;
+            border: none;
+            width: 100%;
+            transition: background-color 0.3s ease;
+            font-weight: 500;
+            border-radius: 10px;
+        }
+
+        .btn-primary:hover {
+            background-color: #066782;
+        }
+
+        .content-placeholder {
+            margin-top: 10px;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            margin-top: 30px;
+        }
+
+        @@keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+
+    @* Esta sección es para scripts que necesiten estar en el head (raro para CSS) *@
+    @RenderSection("headScripts", required: false)
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
-            </div>
+    <div class="login-wrapper">
+        <h2>Administrativo</h2>
+        <div class="content-placeholder">
+            @RenderBody() @* Contenido de la vista Login.cshtml se inserta aquí *@
         </div>
+        <div class="footer">© 2025 - Instituto Superior Sise</div>
     </div>
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+    @* Carga de scripts (jQuery para tu script de login, y Bootstrap 5 JS) *@
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/Content/DataTables/js/bootstrap.bundle.min.js"></script>
 
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
+    @* Sección para scripts específicos de cada vista *@
+    @RenderSection("scripts", required: false)
 </body>
 </html>

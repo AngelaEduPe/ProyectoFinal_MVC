@@ -44,11 +44,14 @@
   <ItemGroup>
     <Compile Include="ConexionBD.cs" />
     <Compile Include="LoginDAL.cs" />
+    <Compile Include="PasswordRecoveryDAL.cs" />
+    <Compile Include="PerfilDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UsuarioDAL.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CapaEntidad\CapaEntidades.csproj">
-      <Project>{5e30a777-0001-46a8-8878-0a4634bcff40}</Project>
+    <ProjectReference Include="..\CapaEntidades\CapaEntidades.csproj">
+      <Project>{d765de53-ba04-4dc5-9a2d-ecdb1f55c1e2}</Project>
       <Name>CapaEntidades</Name>
     </ProjectReference>
   </ItemGroup>

@@ -1,0 +1,166 @@
+﻿@{
+    // Define el modelo de tu vista. Asume que estás pasando un objeto Usuario a la vista.
+    // Si tu acción GET no pasa un modelo Usuario, esto podría generar un error si
+    // no instancian uno aquí o en el controlador.
+    @model CapaEntidades.Usuario
+
+    // Título de la página que se mostrará en el navegador
+    ViewBag.Title = "Registrar Nuevo Usuario";
+
+    // Ruta a tu layout principal. Asegúrate de que esta ruta sea correcta.
+    // Usualmente _Layout.cshtml contiene la referencia a jQuery globalmente.
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Registrar Nuevo Usuario</h2>
+
+@* Contenedor para mostrar mensajes de éxito o error del servidor *@
+<div class="alert" id="mensajeAlerta" style="display:none;"></div>
+
+<form id="formularioRegistroUsuario">
+    @* Este campo es crucial para la seguridad (prevención de ataques CSRF).
+        Asegúrate de tener el atributo [ValidateAntiForgeryToken] en tu método POST del controlador. *@
+    @Html.AntiForgeryToken()
+
+    @* Campo para el Correo Electrónico (será el nombre de usuario para login) *@
+    <div class="form-group">
+        <label for="usuario">Correo Electrónico (Usuario):</label>
+        @Html.TextBoxFor(model => model.usuario, new
+        {
+            @class = "form-control",
+            type = "email",
+            required = "required",
+            placeholder = "ejemplo@institucion.com"
+        })
+        @* Muestra mensajes de validación si usas Data Annotations en tu modelo Usuario *@
+        @Html.ValidationMessageFor(model => model.usuario, "", new { @class = "text-danger" })
+    </div>
+
+    @* Campo para la Contraseña *@
+    <div class="form-group">
+        <label for="contrasena">Contraseña:</label>
+        @* El primer parámetro "contrasena" debe coincidir con el nombre del parámetro en tu método POST del controlador. *@
+        @Html.Password("contrasena", null, new
+        {
+            @class = "form-control",
+            required = "required",
+            placeholder = "Mín. 8 caracteres, 1 mayúscula, 1 número, 1 especial"
+        })
+        @Html.ValidationMessage("contrasena", "", new { @class = "text-danger" })
+    </div>
+
+    @* Apellidos y Nombres *@
+    <div class="form-group">
+        <label for="apellidoPaterno">Apellido Paterno:</label>
+        @Html.TextBoxFor(model => model.apellidoPaterno, new { @class = "form-control", required = "required" })
+        @Html.ValidationMessageFor(model => model.apellidoPaterno, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label for="apellidoMaterno">Apellido Materno:</label>
+        @Html.TextBoxFor(model => model.apellidoMaterno, new { @class = "form-control", required = "required" })
+        @Html.ValidationMessageFor(model => model.apellidoMaterno, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label for="nombre">Nombres:</label>
+        @Html.TextBoxFor(model => model.nombre, new { @class = "form-control", required = "required" })
+        @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+    </div>
+
+    @* Dropdown para seleccionar el Perfil del nuevo usuario *@
+    <div class="form-group">
+        <label for="idPerfilSeleccionado">Perfil de Usuario:</label>
+        @* "idPerfilSeleccionado" debe coincidir con el parámetro en tu acción POST del controlador.
+            ViewBag.PerfilesList es el SelectList que envías desde el controlador.
+            "Seleccione un perfil" es el texto de la opción por defecto. *@
+        @Html.DropDownList("idPerfilSeleccionado", ViewBag.PerfilesList as SelectList, "Seleccione un perfil", new { @class = "form-control", required = "required" })
+        @Html.ValidationMessage("idPerfilSeleccionado", "", new { @class = "text-danger" })
+    </div>
+
+    @* Botón para enviar el formulario *@
+    <button type="submit" class="btn btn-primary" id="btnRegistrar">Registrar Usuario</button>
+
+    @* Botón para cancelar y volver a la página de inicio *@
+    <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Cancelar</a>
+</form>
+
+@section scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Guarda una referencia al elemento donde se mostrarán los mensajes de alerta
+            var $mensajeAlerta = $('#mensajeAlerta');
+
+            // Adjunta un manejador de eventos al envío del formulario
+            $('#formularioRegistroUsuario').submit(function (e) {
+                e.preventDefault(); // Evita que el formulario se envíe de la manera tradicional (recarga de página)
+
+                // Limpia cualquier mensaje de alerta anterior y oculta el contenedor
+                $mensajeAlerta.hide().removeClass('alert-success alert-danger').text('');
+
+                // Deshabilita el botón de envío y cambia su texto para indicar que se está procesando
+                $('#btnRegistrar').prop('disabled', true).text('Registrando...');
+
+                // Serializa todos los datos del formulario en un formato URL-encoded.
+                // Esto incluye todos los campos de texto, el DropDownList y el __RequestVerificationToken.
+                var formData = $(this).serialize();
+
+                // Realiza la llamada AJAX al controlador
+                $.ajax({
+                    url: '@Url.Action("AgregarNuevoUsuario", "Usuario")', // Genera la URL correcta a la acción POST
+                    type: 'POST',
+                    data: formData, // Envía los datos serializados del formulario
+                    dataType: 'json', // Espera una respuesta en formato JSON del servidor
+                    success: function (response) {
+                        // Esta función se ejecuta si la solicitud AJAX es exitosa (código de estado HTTP 2xx)
+                        if (response.exito) {
+                            // Si la operación fue exitosa, muestra un mensaje de éxito
+                            $mensajeAlerta.addClass('alert-success').text(response.mensaje).fadeIn();
+
+                            // Limpia todos los campos del formulario
+                            $('#formularioRegistroUsuario')[0].reset();
+                            // Resetea específicamente el DropDownList a su opción por defecto si no es el primer elemento
+                            $('#idPerfilSeleccionado').val('');
+
+                            // Si el controlador proporcionó una URL de redirección, navega a ella después de un breve retraso
+                            if (response.redirectUrl) {
+                                setTimeout(function () {
+                                    window.location.href = response.redirectUrl;
+                                }, 1500); // 1.5 segundos de retraso
+                            }
+                        } else {
+                            // Si hubo un error en la lógica del negocio (ej. validación en el servidor), muestra un mensaje de error
+                            $mensajeAlerta.addClass('alert-danger').text(response.mensaje).fadeIn();
+
+                            // Si el servidor devolvió una lista de errores de validación (por ejemplo, de ModelState)
+                            if (response.errores && response.errores.length > 0) {
+                                var erroresHtml = '<ul>';
+                                $.each(response.errores, function(index, error) {
+                                    erroresHtml += '<li>' + error + '</li>';
+                                });
+                                erroresHtml += '</ul>';
+                                $mensajeAlerta.append(erroresHtml); // Añade los errores como una lista al mensaje de alerta
+                            }
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        // Esta función se ejecuta si hay un error en la comunicación AJAX (ej. error de red, servidor no responde, error HTTP 500)
+                        $mensajeAlerta.addClass('alert-danger').text("Error en la solicitud: " + textStatus + " - " + errorThrown + ". " + jqXHR.responseText).fadeIn();
+                        console.error("AJAX Error Detallado: ", jqXHR.responseText); // Muestra el detalle del error en la consola del navegador para depuración
+                    },
+                    complete: function () {
+                        // Esta función se ejecuta siempre, al finalizar la solicitud AJAX (éxito o error)
+                        // Restaura el estado original del botón de envío
+                        $('#btnRegistrar').prop('disabled', false).text('Registrar Usuario');
+                    }
+                });
+            });
+        });
+    </script>
+}

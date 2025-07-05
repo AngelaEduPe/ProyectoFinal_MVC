@@ -4,10 +4,10 @@
 }
 
 <style>
-
+    /* Tu CSS existente */
     .login-container {
         max-width: 450px;
-        margin: 50px auto; 
+        margin: 50px auto;
         padding: 30px;
         background-color: white;
         border-radius: 15px;
@@ -90,18 +90,19 @@
 <div class="login-container">
     <h3 class="text-center">Iniciar Sesión</h3>
 
-    <div id="respuesta" aria-live="polite" class="mb-3"></div> 
+    <div id="respuesta" aria-live="polite" class="mb-3"></div>
     <form id="loginForm">
+        @* No se especifican action/method aquí, ya que el JS lo manejará *@
 
         <div class="form-group mb-3">
             <label for="txtUsuario">Nombre de Usuario o Correo</label>
-            <input type="text" id="txtUsuario" name="usuario" class="form-control" placeholder="Ingrese su usuario o correo" required /> @* Convertido de asp:TextBox *@
+            <input type="text" id="txtUsuario" name="usuario" class="form-control" placeholder="Ingrese su usuario o correo" required />
             <div class="error-message" id="usuarioError"></div>
         </div>
 
         <div class="form-group mt-3">
             <label for="txtContra">Contraseña</label>
-            <input type="password" id="txtContra" name="contrasena" class="form-control" placeholder="Ingrese su contraseña" required /> @* Convertido de asp:TextBox *@
+            <input type="password" id="txtContra" name="contrasena" class="form-control" placeholder="Ingrese su contraseña" required />
             <div class="error-message" id="contrasenaError"></div>
             <div class="eye-toggle" onclick="togglePassword()">
                 <i id="eyeIcon" class="fas fa-eye-slash"></i>
@@ -109,12 +110,11 @@
             </div>
         </div>
 
-        <button type="submit" id="submitButton" class="btn btn-primary btn-block mt-4 w-100">Iniciar Sesión</button> @* Convertido de asp:Button *@
-        <div id="loadingIndicator" style="display:none; text-align: center; margin-top: 10px;">Cargando...</div> @* Indicador de carga *@
+        <button type="submit" id="submitButton" class="btn btn-primary btn-block mt-4 w-100">Iniciar Sesión</button>
+        <div id="loadingIndicator" style="display:none; text-align: center; margin-top: 10px;">Cargando...</div>
 
         <div class="text-center mt-4">
             <a href="~/SolicitarRecuperacion.aspx" class="btn btn-link btn-sm text-secondary">
-                @* Convertido de asp:HyperLink *@
                 ¿Olvidaste tu contraseña?
             </a>
         </div>
@@ -122,12 +122,12 @@
 </div>
 
 @section scripts {
+    @* Asegúrate de que jQuery esté cargado ANTES de este script, usualmente en _Layout.cshtml *@
     @* CDN de SweetAlert2 (JS) *@
     <script src="~/Content/DataTables/js/sweetalert2@11.js"></script>
 
     <script>
         function togglePassword() {
-            // Ya no usamos .ClientID, sino el ID directo del elemento
             const passwordInput = document.getElementById('txtContra');
             const eyeIcon = document.getElementById('eyeIcon');
 
@@ -144,14 +144,14 @@
 
         $(document).ready(function() {
             $("#loginForm").submit(function(e) {
-                e.preventDefault();
+                e.preventDefault(); // Evita el envío tradicional del formulario
 
                 $("#respuesta").empty();
                 $(".error-message").empty();
 
                 let isValid = true;
-                const usuario = $("#txtUsuario").val(); // Usar el ID correcto
-                const contrasena = $("#txtContra").val(); // Usar el ID correcto
+                const usuario = $("#txtUsuario").val();
+                const contrasena = $("#txtContra").val();
 
                 if (!usuario) {
                     $("#usuarioError").text("El usuario es requerido.").css("color", "red");
@@ -163,7 +163,6 @@
                 }
 
                 if (!isValid) {
-                    // Opcional: mostrar un SweetAlert si la validación falla en el cliente
                     Swal.fire({
                         icon: 'error',
                         title: 'Error de validación',
@@ -176,12 +175,11 @@
                 $("#submitButton").prop("disabled", true);
 
                 $.ajax({
-                    url: '@Url.Action("IniciarSesion", "Login")',
+                    url: '@Url.Action("VerificarCredenciales", "Login")',
                     method: 'POST',
-                    data: $(this).serialize(),
+                    data: $(this).serialize(), // Envía los datos del formulario
                     success: function(resp) {
                         if (resp.exito) {
-                            // Usar SweetAlert para el mensaje de éxito
                             Swal.fire({
                                 icon: 'success',
                                 title: '¡Éxito!',
@@ -189,10 +187,12 @@
                                 timer: 2000,
                                 timerProgressBar: true
                             }).then((result) => {
-                                window.location.href = '/Home/blablabla'; // Redirigir después del SweetAlert
+                                // **** Ajusta esta URL a tu página principal después del login ****
+                                // Por ejemplo, si es el Index del HomeController: '/Home/Index'
+                                // Si es el Index del UsuarioController: '/Usuario/Index'
+                                window.location.href = '/Usuario/Index'; // Ejemplo de redirección
                             });
                         } else {
-                            // Usar SweetAlert para el mensaje de error
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Error al iniciar sesión',
@@ -201,7 +201,6 @@
                         }
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
-                        // Usar SweetAlert para errores de AJAX
                         Swal.fire({
                             icon: 'error',
                             title: 'Error de conexión',
