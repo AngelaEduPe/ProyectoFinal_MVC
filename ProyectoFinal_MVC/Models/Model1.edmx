@@ -1,0 +1,1406 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Trabajo_Aplicativo_Gestion_DocentesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Carrera">
+          <Key>
+            <PropertyRef Name="IdCarrera" />
+          </Key>
+          <Property Name="IdCarrera" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreCarrera" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Curso">
+          <Key>
+            <PropertyRef Name="IdCurso" />
+          </Key>
+          <Property Name="IdCurso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCarrera" Type="int" Nullable="false" />
+          <Property Name="NombreCurso" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Curso_Dictado">
+          <Key>
+            <PropertyRef Name="IdCursoDictado" />
+          </Key>
+          <Property Name="IdCursoDictado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdDocente" Type="int" Nullable="false" />
+          <Property Name="IdCurso" Type="int" Nullable="false" />
+          <Property Name="IdEliminado" Type="int" />
+          <Property Name="IdUsuarioCreacion" Type="int" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="IdUsuarioModificacion" Type="int" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="IdDepartamento" />
+          </Key>
+          <Property Name="IdDepartamento" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="NombreDepartamento" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="Distrito">
+          <Key>
+            <PropertyRef Name="IdDistrito" />
+          </Key>
+          <Property Name="IdDistrito" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="NombreDistrito" Type="varchar" MaxLength="45" />
+          <Property Name="IdProvincia" Type="varchar" MaxLength="4" />
+        </EntityType>
+        <EntityType Name="Docente">
+          <Key>
+            <PropertyRef Name="IdDocente" />
+          </Key>
+          <Property Name="IdDocente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="IdTipoDocumento" Type="int" />
+          <Property Name="NumeroDocumento" Type="varchar" MaxLength="12" />
+          <Property Name="IdGenero" Type="int" />
+          <Property Name="IdEstadoCivil" Type="int" />
+          <Property Name="Direccion" Type="varchar" MaxLength="100" />
+          <Property Name="IdDepartamento" Type="varchar" MaxLength="2" />
+          <Property Name="IdProvincia" Type="varchar" MaxLength="4" />
+          <Property Name="IdDistrito" Type="varchar" MaxLength="6" />
+          <Property Name="Telefono" Type="varchar" MaxLength="7" />
+          <Property Name="Celular" Type="varchar" MaxLength="9" />
+          <Property Name="Foto" Type="varbinary(max)" />
+          <Property Name="CostoHora" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="IdEliminado" Type="int" />
+          <Property Name="IdUsuarioCreacion" Type="int" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="IdUsuarioModificacion" Type="int" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="EstadoCivil">
+          <Key>
+            <PropertyRef Name="IdEstadoCivil" />
+          </Key>
+          <Property Name="IdEstadoCivil" Type="int" Nullable="false" />
+          <Property Name="TipoEstadoCivil" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="ExperienciaLaboral">
+          <Key>
+            <PropertyRef Name="IdExperiencia" />
+          </Key>
+          <Property Name="IdExperiencia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdDocente" Type="int" Nullable="false" />
+          <Property Name="Empresa" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Cargo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FechaInicio" Type="date" Nullable="false" />
+          <Property Name="FechaFin" Type="date" />
+          <Property Name="Certificado" Type="varbinary(max)" />
+          <Property Name="IdEliminado" Type="int" />
+          <Property Name="IdUsuarioCreacion" Type="int" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="IdUsuarioModificacion" Type="int" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Genero">
+          <Key>
+            <PropertyRef Name="IdGenero" />
+          </Key>
+          <Property Name="IdGenero" Type="int" Nullable="false" />
+          <Property Name="TipoGenero" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="PasswordRecoveryTokens">
+          <Key>
+            <PropertyRef Name="IdToken" />
+          </Key>
+          <Property Name="IdToken" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Token" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="IdUsuario" Type="int" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="FechaExpiracion" Type="datetime" Nullable="false" />
+          <Property Name="Usado" Type="bit" />
+        </EntityType>
+        <EntityType Name="Perfil">
+          <Key>
+            <PropertyRef Name="IdPerfil" />
+          </Key>
+          <Property Name="IdPerfil" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Provincia">
+          <Key>
+            <PropertyRef Name="IdProvincia" />
+          </Key>
+          <Property Name="IdProvincia" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="NombreProvincia" Type="varchar" MaxLength="45" />
+          <Property Name="IdDepartamento" Type="varchar" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="TipoDocumento">
+          <Key>
+            <PropertyRef Name="IdTipoDocumento" />
+          </Key>
+          <Property Name="IdTipoDocumento" Type="int" Nullable="false" />
+          <Property Name="Abreviatura" Type="varchar" MaxLength="5" />
+          <Property Name="NombreTipoDocumento" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Titulo">
+          <Key>
+            <PropertyRef Name="IdTitulo" />
+          </Key>
+          <Property Name="IdTitulo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdDocente" Type="int" Nullable="false" />
+          <Property Name="GradoObtenido" Type="varchar" MaxLength="200" />
+          <Property Name="CentroEstudios" Type="varchar" MaxLength="200" />
+          <Property Name="AnoGraduacion" Type="int" />
+          <Property Name="ImagenTitulo" Type="varbinary(max)" />
+          <Property Name="IdEliminado" Type="int" />
+          <Property Name="IdUsuarioCreacion" Type="int" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="IdUsuarioModificacion" Type="int" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ContrasenaHash" Type="varbinary" MaxLength="64" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="varchar" MaxLength="50" />
+          <Property Name="ApellidoMaterno" Type="varchar" MaxLength="50" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="IdPerfil" Type="int" Nullable="false" />
+          <Property Name="IdEliminado" Type="int" />
+          <Property Name="IdUsuarioCreacion" Type="int" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="IdUsuarioModificacion" Type="int" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_Curso_Carrera">
+          <End Role="Carrera" Type="Self.Carrera" Multiplicity="1" />
+          <End Role="Curso" Type="Self.Curso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carrera">
+              <PropertyRef Name="IdCarrera" />
+            </Principal>
+            <Dependent Role="Curso">
+              <PropertyRef Name="IdCarrera" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CursoDictado_Curso">
+          <End Role="Curso" Type="Self.Curso" Multiplicity="1" />
+          <End Role="Curso_Dictado" Type="Self.Curso_Dictado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curso">
+              <PropertyRef Name="IdCurso" />
+            </Principal>
+            <Dependent Role="Curso_Dictado">
+              <PropertyRef Name="IdCurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CursoDictado_Docente">
+          <End Role="Docente" Type="Self.Docente" Multiplicity="1" />
+          <End Role="Curso_Dictado" Type="Self.Curso_Dictado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Docente">
+              <PropertyRef Name="IdDocente" />
+            </Principal>
+            <Dependent Role="Curso_Dictado">
+              <PropertyRef Name="IdDocente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CursoDictado_UsuarioCreacion">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Curso_Dictado" Type="Self.Curso_Dictado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Curso_Dictado">
+              <PropertyRef Name="IdUsuarioCreacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CursoDictado_UsuarioModificacion">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Curso_Dictado" Type="Self.Curso_Dictado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Curso_Dictado">
+              <PropertyRef Name="IdUsuarioModificacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Distrito_Provincia">
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="0..1" />
+          <End Role="Distrito" Type="Self.Distrito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="IdProvincia" />
+            </Principal>
+            <Dependent Role="Distrito">
+              <PropertyRef Name="IdProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Docente_Departamento">
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1" />
+          <End Role="Docente" Type="Self.Docente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="IdDepartamento" />
+            </Principal>
+            <Dependent Role="Docente">
+              <PropertyRef Name="IdDepartamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Docente_Distrito">
+          <End Role="Distrito" Type="Self.Distrito" Multiplicity="0..1" />
+          <End Role="Docente" Type="Self.Docente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Distrito">
+              <PropertyRef Name="IdDistrito" />
+            </Principal>
+            <Dependent Role="Docente">
+              <PropertyRef Name="IdDistrito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Docente_EstadoCivil">
+          <End Role="EstadoCivil" Type="Self.EstadoCivil" Multiplicity="0..1" />
+          <End Role="Docente" Type="Self.Docente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoCivil">
+              <PropertyRef Name="IdEstadoCivil" />
+            </Principal>
+            <Dependent Role="Docente">
+              <PropertyRef Name="IdEstadoCivil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Docente_Genero">
+          <End Role="Genero" Type="Self.Genero" Multiplicity="0..1" />
+          <End Role="Docente" Type="Self.Docente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genero">
+              <PropertyRef Name="IdGenero" />
+            </Principal>
+            <Dependent Role="Docente">
+              <PropertyRef Name="IdGenero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Docente_Provincia">
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="0..1" />
+          <End Role="Docente" Type="Self.Docente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="IdProvincia" />
+            </Principal>
+            <Dependent Role="Docente">
+              <PropertyRef Name="IdProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Docente_TipoDocumento">
+          <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="0..1" />
+          <End Role="Docente" Type="Self.Docente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDocumento">
+              <PropertyRef Name="IdTipoDocumento" />
+            </Principal>
+            <Dependent Role="Docente">
+              <PropertyRef Name="IdTipoDocumento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Docente_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Docente" Type="Self.Docente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Docente">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Docente_UsuarioCreacion">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Docente" Type="Self.Docente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Docente">
+              <PropertyRef Name="IdUsuarioCreacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Docente_UsuarioModificacion">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Docente" Type="Self.Docente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Docente">
+              <PropertyRef Name="IdUsuarioModificacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Experiencia_Docente">
+          <End Role="Docente" Type="Self.Docente" Multiplicity="1" />
+          <End Role="ExperienciaLaboral" Type="Self.ExperienciaLaboral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Docente">
+              <PropertyRef Name="IdDocente" />
+            </Principal>
+            <Dependent Role="ExperienciaLaboral">
+              <PropertyRef Name="IdDocente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Experiencia_UsuarioCreacion">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="ExperienciaLaboral" Type="Self.ExperienciaLaboral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="ExperienciaLaboral">
+              <PropertyRef Name="IdUsuarioCreacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Experiencia_UsuarioModificacion">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="ExperienciaLaboral" Type="Self.ExperienciaLaboral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="ExperienciaLaboral">
+              <PropertyRef Name="IdUsuarioModificacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PasswordRecoveryTokens_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PasswordRecoveryTokens" Type="Self.PasswordRecoveryTokens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="PasswordRecoveryTokens">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Provincia_Departamento">
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1" />
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="IdDepartamento" />
+            </Principal>
+            <Dependent Role="Provincia">
+              <PropertyRef Name="IdDepartamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Titulo_Docente">
+          <End Role="Docente" Type="Self.Docente" Multiplicity="1" />
+          <End Role="Titulo" Type="Self.Titulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Docente">
+              <PropertyRef Name="IdDocente" />
+            </Principal>
+            <Dependent Role="Titulo">
+              <PropertyRef Name="IdDocente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Titulo_UsuarioCreacion">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Titulo" Type="Self.Titulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Titulo">
+              <PropertyRef Name="IdUsuarioCreacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Titulo_UsuarioModificacion">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Titulo" Type="Self.Titulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Titulo">
+              <PropertyRef Name="IdUsuarioModificacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Perfil">
+          <End Role="Perfil" Type="Self.Perfil" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Perfil">
+              <PropertyRef Name="IdPerfil" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="IdPerfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Trabajo_Aplicativo_Gestion_DocentesModelStoreContainer">
+          <EntitySet Name="Carrera" EntityType="Self.Carrera" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Curso" EntityType="Self.Curso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Curso_Dictado" EntityType="Self.Curso_Dictado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Distrito" EntityType="Self.Distrito" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Docente" EntityType="Self.Docente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstadoCivil" EntityType="Self.EstadoCivil" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExperienciaLaboral" EntityType="Self.ExperienciaLaboral" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Genero" EntityType="Self.Genero" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PasswordRecoveryTokens" EntityType="Self.PasswordRecoveryTokens" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Perfil" EntityType="Self.Perfil" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Titulo" EntityType="Self.Titulo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Curso_Carrera" Association="Self.FK_Curso_Carrera">
+            <End Role="Carrera" EntitySet="Carrera" />
+            <End Role="Curso" EntitySet="Curso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CursoDictado_Curso" Association="Self.FK_CursoDictado_Curso">
+            <End Role="Curso" EntitySet="Curso" />
+            <End Role="Curso_Dictado" EntitySet="Curso_Dictado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CursoDictado_Docente" Association="Self.FK_CursoDictado_Docente">
+            <End Role="Docente" EntitySet="Docente" />
+            <End Role="Curso_Dictado" EntitySet="Curso_Dictado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CursoDictado_UsuarioCreacion" Association="Self.FK_CursoDictado_UsuarioCreacion">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Curso_Dictado" EntitySet="Curso_Dictado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CursoDictado_UsuarioModificacion" Association="Self.FK_CursoDictado_UsuarioModificacion">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Curso_Dictado" EntitySet="Curso_Dictado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Distrito_Provincia" Association="Self.FK_Distrito_Provincia">
+            <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="Distrito" EntitySet="Distrito" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Docente_Departamento" Association="Self.FK_Docente_Departamento">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="Docente" EntitySet="Docente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Docente_Distrito" Association="Self.FK_Docente_Distrito">
+            <End Role="Distrito" EntitySet="Distrito" />
+            <End Role="Docente" EntitySet="Docente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Docente_EstadoCivil" Association="Self.FK_Docente_EstadoCivil">
+            <End Role="EstadoCivil" EntitySet="EstadoCivil" />
+            <End Role="Docente" EntitySet="Docente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Docente_Genero" Association="Self.FK_Docente_Genero">
+            <End Role="Genero" EntitySet="Genero" />
+            <End Role="Docente" EntitySet="Docente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Docente_Provincia" Association="Self.FK_Docente_Provincia">
+            <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="Docente" EntitySet="Docente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Docente_TipoDocumento" Association="Self.FK_Docente_TipoDocumento">
+            <End Role="TipoDocumento" EntitySet="TipoDocumento" />
+            <End Role="Docente" EntitySet="Docente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Docente_Usuario" Association="Self.FK_Docente_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Docente" EntitySet="Docente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Docente_UsuarioCreacion" Association="Self.FK_Docente_UsuarioCreacion">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Docente" EntitySet="Docente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Docente_UsuarioModificacion" Association="Self.FK_Docente_UsuarioModificacion">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Docente" EntitySet="Docente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Experiencia_Docente" Association="Self.FK_Experiencia_Docente">
+            <End Role="Docente" EntitySet="Docente" />
+            <End Role="ExperienciaLaboral" EntitySet="ExperienciaLaboral" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Experiencia_UsuarioCreacion" Association="Self.FK_Experiencia_UsuarioCreacion">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="ExperienciaLaboral" EntitySet="ExperienciaLaboral" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Experiencia_UsuarioModificacion" Association="Self.FK_Experiencia_UsuarioModificacion">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="ExperienciaLaboral" EntitySet="ExperienciaLaboral" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PasswordRecoveryTokens_Usuario" Association="Self.FK_PasswordRecoveryTokens_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="PasswordRecoveryTokens" EntitySet="PasswordRecoveryTokens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Provincia_Departamento" Association="Self.FK_Provincia_Departamento">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="Provincia" EntitySet="Provincia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Titulo_Docente" Association="Self.FK_Titulo_Docente">
+            <End Role="Docente" EntitySet="Docente" />
+            <End Role="Titulo" EntitySet="Titulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Titulo_UsuarioCreacion" Association="Self.FK_Titulo_UsuarioCreacion">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Titulo" EntitySet="Titulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Titulo_UsuarioModificacion" Association="Self.FK_Titulo_UsuarioModificacion">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Titulo" EntitySet="Titulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Perfil" Association="Self.FK_Usuario_Perfil">
+            <End Role="Perfil" EntitySet="Perfil" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Trabajo_Aplicativo_Gestion_DocentesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Carrera">
+          <Key>
+            <PropertyRef Name="IdCarrera" />
+          </Key>
+          <Property Name="IdCarrera" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreCarrera" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Curso" Relationship="Self.FK_Curso_Carrera" FromRole="Carrera" ToRole="Curso" />
+        </EntityType>
+        <EntityType Name="Curso">
+          <Key>
+            <PropertyRef Name="IdCurso" />
+          </Key>
+          <Property Name="IdCurso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCarrera" Type="Int32" Nullable="false" />
+          <Property Name="NombreCurso" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Carrera" Relationship="Self.FK_Curso_Carrera" FromRole="Curso" ToRole="Carrera" />
+          <NavigationProperty Name="Curso_Dictado" Relationship="Self.FK_CursoDictado_Curso" FromRole="Curso" ToRole="Curso_Dictado" />
+        </EntityType>
+        <EntityType Name="Curso_Dictado">
+          <Key>
+            <PropertyRef Name="IdCursoDictado" />
+          </Key>
+          <Property Name="IdCursoDictado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdDocente" Type="Int32" Nullable="false" />
+          <Property Name="IdCurso" Type="Int32" Nullable="false" />
+          <Property Name="IdEliminado" Type="Int32" />
+          <Property Name="IdUsuarioCreacion" Type="Int32" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="Int32" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Curso" Relationship="Self.FK_CursoDictado_Curso" FromRole="Curso_Dictado" ToRole="Curso" />
+          <NavigationProperty Name="Docente" Relationship="Self.FK_CursoDictado_Docente" FromRole="Curso_Dictado" ToRole="Docente" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_CursoDictado_UsuarioCreacion" FromRole="Curso_Dictado" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario1" Relationship="Self.FK_CursoDictado_UsuarioModificacion" FromRole="Curso_Dictado" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="IdDepartamento" />
+          </Key>
+          <Property Name="IdDepartamento" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NombreDepartamento" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Docente" Relationship="Self.FK_Docente_Departamento" FromRole="Departamento" ToRole="Docente" />
+          <NavigationProperty Name="Provincia" Relationship="Self.FK_Provincia_Departamento" FromRole="Departamento" ToRole="Provincia" />
+        </EntityType>
+        <EntityType Name="Distrito">
+          <Key>
+            <PropertyRef Name="IdDistrito" />
+          </Key>
+          <Property Name="IdDistrito" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NombreDistrito" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="IdProvincia" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Provincia" Relationship="Self.FK_Distrito_Provincia" FromRole="Distrito" ToRole="Provincia" />
+          <NavigationProperty Name="Docente" Relationship="Self.FK_Docente_Distrito" FromRole="Distrito" ToRole="Docente" />
+        </EntityType>
+        <EntityType Name="Docente">
+          <Key>
+            <PropertyRef Name="IdDocente" />
+          </Key>
+          <Property Name="IdDocente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="IdTipoDocumento" Type="Int32" />
+          <Property Name="NumeroDocumento" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="IdGenero" Type="Int32" />
+          <Property Name="IdEstadoCivil" Type="Int32" />
+          <Property Name="Direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdDepartamento" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="IdProvincia" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="IdDistrito" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="Celular" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="Foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="CostoHora" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="IdEliminado" Type="Int32" />
+          <Property Name="IdUsuarioCreacion" Type="Int32" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="Int32" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Curso_Dictado" Relationship="Self.FK_CursoDictado_Docente" FromRole="Docente" ToRole="Curso_Dictado" />
+          <NavigationProperty Name="Departamento" Relationship="Self.FK_Docente_Departamento" FromRole="Docente" ToRole="Departamento" />
+          <NavigationProperty Name="Distrito" Relationship="Self.FK_Docente_Distrito" FromRole="Docente" ToRole="Distrito" />
+          <NavigationProperty Name="EstadoCivil" Relationship="Self.FK_Docente_EstadoCivil" FromRole="Docente" ToRole="EstadoCivil" />
+          <NavigationProperty Name="Genero" Relationship="Self.FK_Docente_Genero" FromRole="Docente" ToRole="Genero" />
+          <NavigationProperty Name="Provincia" Relationship="Self.FK_Docente_Provincia" FromRole="Docente" ToRole="Provincia" />
+          <NavigationProperty Name="TipoDocumento" Relationship="Self.FK_Docente_TipoDocumento" FromRole="Docente" ToRole="TipoDocumento" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Docente_Usuario" FromRole="Docente" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario1" Relationship="Self.FK_Docente_UsuarioCreacion" FromRole="Docente" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario2" Relationship="Self.FK_Docente_UsuarioModificacion" FromRole="Docente" ToRole="Usuario" />
+          <NavigationProperty Name="ExperienciaLaboral" Relationship="Self.FK_Experiencia_Docente" FromRole="Docente" ToRole="ExperienciaLaboral" />
+          <NavigationProperty Name="Titulo" Relationship="Self.FK_Titulo_Docente" FromRole="Docente" ToRole="Titulo" />
+        </EntityType>
+        <EntityType Name="EstadoCivil">
+          <Key>
+            <PropertyRef Name="IdEstadoCivil" />
+          </Key>
+          <Property Name="IdEstadoCivil" Type="Int32" Nullable="false" />
+          <Property Name="TipoEstadoCivil" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Docente" Relationship="Self.FK_Docente_EstadoCivil" FromRole="EstadoCivil" ToRole="Docente" />
+        </EntityType>
+        <EntityType Name="ExperienciaLaboral">
+          <Key>
+            <PropertyRef Name="IdExperiencia" />
+          </Key>
+          <Property Name="IdExperiencia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdDocente" Type="Int32" Nullable="false" />
+          <Property Name="Empresa" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cargo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="Certificado" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IdEliminado" Type="Int32" />
+          <Property Name="IdUsuarioCreacion" Type="Int32" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="Int32" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Docente" Relationship="Self.FK_Experiencia_Docente" FromRole="ExperienciaLaboral" ToRole="Docente" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Experiencia_UsuarioCreacion" FromRole="ExperienciaLaboral" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario1" Relationship="Self.FK_Experiencia_UsuarioModificacion" FromRole="ExperienciaLaboral" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Genero">
+          <Key>
+            <PropertyRef Name="IdGenero" />
+          </Key>
+          <Property Name="IdGenero" Type="Int32" Nullable="false" />
+          <Property Name="TipoGenero" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Docente" Relationship="Self.FK_Docente_Genero" FromRole="Genero" ToRole="Docente" />
+        </EntityType>
+        <EntityType Name="PasswordRecoveryTokens">
+          <Key>
+            <PropertyRef Name="IdToken" />
+          </Key>
+          <Property Name="IdToken" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Token" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="FechaExpiracion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Usado" Type="Boolean" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_PasswordRecoveryTokens_Usuario" FromRole="PasswordRecoveryTokens" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Perfil">
+          <Key>
+            <PropertyRef Name="IdPerfil" />
+          </Key>
+          <Property Name="IdPerfil" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_Perfil" FromRole="Perfil" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Provincia">
+          <Key>
+            <PropertyRef Name="IdProvincia" />
+          </Key>
+          <Property Name="IdProvincia" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NombreProvincia" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="IdDepartamento" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Departamento" Relationship="Self.FK_Provincia_Departamento" FromRole="Provincia" ToRole="Departamento" />
+          <NavigationProperty Name="Distrito" Relationship="Self.FK_Distrito_Provincia" FromRole="Provincia" ToRole="Distrito" />
+          <NavigationProperty Name="Docente" Relationship="Self.FK_Docente_Provincia" FromRole="Provincia" ToRole="Docente" />
+        </EntityType>
+        <EntityType Name="TipoDocumento">
+          <Key>
+            <PropertyRef Name="IdTipoDocumento" />
+          </Key>
+          <Property Name="IdTipoDocumento" Type="Int32" Nullable="false" />
+          <Property Name="Abreviatura" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="NombreTipoDocumento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Docente" Relationship="Self.FK_Docente_TipoDocumento" FromRole="TipoDocumento" ToRole="Docente" />
+        </EntityType>
+        <EntityType Name="Titulo">
+          <Key>
+            <PropertyRef Name="IdTitulo" />
+          </Key>
+          <Property Name="IdTitulo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdDocente" Type="Int32" Nullable="false" />
+          <Property Name="GradoObtenido" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CentroEstudios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="AnoGraduacion" Type="Int32" />
+          <Property Name="ImagenTitulo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IdEliminado" Type="Int32" />
+          <Property Name="IdUsuarioCreacion" Type="Int32" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="Int32" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Docente" Relationship="Self.FK_Titulo_Docente" FromRole="Titulo" ToRole="Docente" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Titulo_UsuarioCreacion" FromRole="Titulo" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario1" Relationship="Self.FK_Titulo_UsuarioModificacion" FromRole="Titulo" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Usuario1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ContrasenaHash" Type="Binary" MaxLength="64" FixedLength="false" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoMaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdPerfil" Type="Int32" Nullable="false" />
+          <Property Name="IdEliminado" Type="Int32" />
+          <Property Name="IdUsuarioCreacion" Type="Int32" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="Int32" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Curso_Dictado" Relationship="Self.FK_CursoDictado_UsuarioCreacion" FromRole="Usuario" ToRole="Curso_Dictado" />
+          <NavigationProperty Name="Curso_Dictado1" Relationship="Self.FK_CursoDictado_UsuarioModificacion" FromRole="Usuario" ToRole="Curso_Dictado" />
+          <NavigationProperty Name="Docente" Relationship="Self.FK_Docente_Usuario" FromRole="Usuario" ToRole="Docente" />
+          <NavigationProperty Name="Docente1" Relationship="Self.FK_Docente_UsuarioCreacion" FromRole="Usuario" ToRole="Docente" />
+          <NavigationProperty Name="Docente2" Relationship="Self.FK_Docente_UsuarioModificacion" FromRole="Usuario" ToRole="Docente" />
+          <NavigationProperty Name="ExperienciaLaboral" Relationship="Self.FK_Experiencia_UsuarioCreacion" FromRole="Usuario" ToRole="ExperienciaLaboral" />
+          <NavigationProperty Name="ExperienciaLaboral1" Relationship="Self.FK_Experiencia_UsuarioModificacion" FromRole="Usuario" ToRole="ExperienciaLaboral" />
+          <NavigationProperty Name="PasswordRecoveryTokens" Relationship="Self.FK_PasswordRecoveryTokens_Usuario" FromRole="Usuario" ToRole="PasswordRecoveryTokens" />
+          <NavigationProperty Name="Perfil" Relationship="Self.FK_Usuario_Perfil" FromRole="Usuario" ToRole="Perfil" />
+          <NavigationProperty Name="Titulo" Relationship="Self.FK_Titulo_UsuarioCreacion" FromRole="Usuario" ToRole="Titulo" />
+          <NavigationProperty Name="Titulo1" Relationship="Self.FK_Titulo_UsuarioModificacion" FromRole="Usuario" ToRole="Titulo" />
+        </EntityType>
+        <Association Name="FK_Curso_Carrera">
+          <End Role="Carrera" Type="Self.Carrera" Multiplicity="1" />
+          <End Role="Curso" Type="Self.Curso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carrera">
+              <PropertyRef Name="IdCarrera" />
+            </Principal>
+            <Dependent Role="Curso">
+              <PropertyRef Name="IdCarrera" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CursoDictado_Curso">
+          <End Role="Curso" Type="Self.Curso" Multiplicity="1" />
+          <End Role="Curso_Dictado" Type="Self.Curso_Dictado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curso">
+              <PropertyRef Name="IdCurso" />
+            </Principal>
+            <Dependent Role="Curso_Dictado">
+              <PropertyRef Name="IdCurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CursoDictado_Docente">
+          <End Role="Docente" Type="Self.Docente" Multiplicity="1" />
+          <End Role="Curso_Dictado" Type="Self.Curso_Dictado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Docente">
+              <PropertyRef Name="IdDocente" />
+            </Principal>
+            <Dependent Role="Curso_Dictado">
+              <PropertyRef Name="IdDocente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CursoDictado_UsuarioCreacion">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Curso_Dictado" Type="Self.Curso_Dictado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Curso_Dictado">
+              <PropertyRef Name="IdUsuarioCreacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CursoDictado_UsuarioModificacion">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Curso_Dictado" Type="Self.Curso_Dictado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Curso_Dictado">
+              <PropertyRef Name="IdUsuarioModificacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Docente_Departamento">
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1" />
+          <End Role="Docente" Type="Self.Docente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="IdDepartamento" />
+            </Principal>
+            <Dependent Role="Docente">
+              <PropertyRef Name="IdDepartamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Provincia_Departamento">
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1" />
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="IdDepartamento" />
+            </Principal>
+            <Dependent Role="Provincia">
+              <PropertyRef Name="IdDepartamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Distrito_Provincia">
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="0..1" />
+          <End Role="Distrito" Type="Self.Distrito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="IdProvincia" />
+            </Principal>
+            <Dependent Role="Distrito">
+              <PropertyRef Name="IdProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Docente_Distrito">
+          <End Role="Distrito" Type="Self.Distrito" Multiplicity="0..1" />
+          <End Role="Docente" Type="Self.Docente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Distrito">
+              <PropertyRef Name="IdDistrito" />
+            </Principal>
+            <Dependent Role="Docente">
+              <PropertyRef Name="IdDistrito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Docente_EstadoCivil">
+          <End Role="EstadoCivil" Type="Self.EstadoCivil" Multiplicity="0..1" />
+          <End Role="Docente" Type="Self.Docente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoCivil">
+              <PropertyRef Name="IdEstadoCivil" />
+            </Principal>
+            <Dependent Role="Docente">
+              <PropertyRef Name="IdEstadoCivil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Docente_Genero">
+          <End Role="Genero" Type="Self.Genero" Multiplicity="0..1" />
+          <End Role="Docente" Type="Self.Docente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genero">
+              <PropertyRef Name="IdGenero" />
+            </Principal>
+            <Dependent Role="Docente">
+              <PropertyRef Name="IdGenero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Docente_Provincia">
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="0..1" />
+          <End Role="Docente" Type="Self.Docente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="IdProvincia" />
+            </Principal>
+            <Dependent Role="Docente">
+              <PropertyRef Name="IdProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Docente_TipoDocumento">
+          <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="0..1" />
+          <End Role="Docente" Type="Self.Docente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDocumento">
+              <PropertyRef Name="IdTipoDocumento" />
+            </Principal>
+            <Dependent Role="Docente">
+              <PropertyRef Name="IdTipoDocumento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Docente_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Docente" Type="Self.Docente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Docente">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Docente_UsuarioCreacion">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Docente" Type="Self.Docente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Docente">
+              <PropertyRef Name="IdUsuarioCreacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Docente_UsuarioModificacion">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Docente" Type="Self.Docente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Docente">
+              <PropertyRef Name="IdUsuarioModificacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Experiencia_Docente">
+          <End Role="Docente" Type="Self.Docente" Multiplicity="1" />
+          <End Role="ExperienciaLaboral" Type="Self.ExperienciaLaboral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Docente">
+              <PropertyRef Name="IdDocente" />
+            </Principal>
+            <Dependent Role="ExperienciaLaboral">
+              <PropertyRef Name="IdDocente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Titulo_Docente">
+          <End Role="Docente" Type="Self.Docente" Multiplicity="1" />
+          <End Role="Titulo" Type="Self.Titulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Docente">
+              <PropertyRef Name="IdDocente" />
+            </Principal>
+            <Dependent Role="Titulo">
+              <PropertyRef Name="IdDocente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Experiencia_UsuarioCreacion">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="ExperienciaLaboral" Type="Self.ExperienciaLaboral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="ExperienciaLaboral">
+              <PropertyRef Name="IdUsuarioCreacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Experiencia_UsuarioModificacion">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="ExperienciaLaboral" Type="Self.ExperienciaLaboral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="ExperienciaLaboral">
+              <PropertyRef Name="IdUsuarioModificacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PasswordRecoveryTokens_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PasswordRecoveryTokens" Type="Self.PasswordRecoveryTokens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="PasswordRecoveryTokens">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Perfil">
+          <End Role="Perfil" Type="Self.Perfil" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Perfil">
+              <PropertyRef Name="IdPerfil" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="IdPerfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Titulo_UsuarioCreacion">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Titulo" Type="Self.Titulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Titulo">
+              <PropertyRef Name="IdUsuarioCreacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Titulo_UsuarioModificacion">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Titulo" Type="Self.Titulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Titulo">
+              <PropertyRef Name="IdUsuarioModificacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Trabajo_Aplicativo_Gestion_DocentesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Carrera" EntityType="Self.Carrera" />
+          <EntitySet Name="Curso" EntityType="Self.Curso" />
+          <EntitySet Name="Curso_Dictado" EntityType="Self.Curso_Dictado" />
+          <EntitySet Name="Departamento" EntityType="Self.Departamento" />
+          <EntitySet Name="Distrito" EntityType="Self.Distrito" />
+          <EntitySet Name="Docente" EntityType="Self.Docente" />
+          <EntitySet Name="EstadoCivil" EntityType="Self.EstadoCivil" />
+          <EntitySet Name="ExperienciaLaboral" EntityType="Self.ExperienciaLaboral" />
+          <EntitySet Name="Genero" EntityType="Self.Genero" />
+          <EntitySet Name="PasswordRecoveryTokens" EntityType="Self.PasswordRecoveryTokens" />
+          <EntitySet Name="Perfil" EntityType="Self.Perfil" />
+          <EntitySet Name="Provincia" EntityType="Self.Provincia" />
+          <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" />
+          <EntitySet Name="Titulo" EntityType="Self.Titulo" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK_Curso_Carrera" Association="Self.FK_Curso_Carrera">
+            <End Role="Carrera" EntitySet="Carrera" />
+            <End Role="Curso" EntitySet="Curso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CursoDictado_Curso" Association="Self.FK_CursoDictado_Curso">
+            <End Role="Curso" EntitySet="Curso" />
+            <End Role="Curso_Dictado" EntitySet="Curso_Dictado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CursoDictado_Docente" Association="Self.FK_CursoDictado_Docente">
+            <End Role="Docente" EntitySet="Docente" />
+            <End Role="Curso_Dictado" EntitySet="Curso_Dictado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CursoDictado_UsuarioCreacion" Association="Self.FK_CursoDictado_UsuarioCreacion">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Curso_Dictado" EntitySet="Curso_Dictado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CursoDictado_UsuarioModificacion" Association="Self.FK_CursoDictado_UsuarioModificacion">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Curso_Dictado" EntitySet="Curso_Dictado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Docente_Departamento" Association="Self.FK_Docente_Departamento">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="Docente" EntitySet="Docente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Provincia_Departamento" Association="Self.FK_Provincia_Departamento">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="Provincia" EntitySet="Provincia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Distrito_Provincia" Association="Self.FK_Distrito_Provincia">
+            <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="Distrito" EntitySet="Distrito" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Docente_Distrito" Association="Self.FK_Docente_Distrito">
+            <End Role="Distrito" EntitySet="Distrito" />
+            <End Role="Docente" EntitySet="Docente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Docente_EstadoCivil" Association="Self.FK_Docente_EstadoCivil">
+            <End Role="EstadoCivil" EntitySet="EstadoCivil" />
+            <End Role="Docente" EntitySet="Docente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Docente_Genero" Association="Self.FK_Docente_Genero">
+            <End Role="Genero" EntitySet="Genero" />
+            <End Role="Docente" EntitySet="Docente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Docente_Provincia" Association="Self.FK_Docente_Provincia">
+            <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="Docente" EntitySet="Docente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Docente_TipoDocumento" Association="Self.FK_Docente_TipoDocumento">
+            <End Role="TipoDocumento" EntitySet="TipoDocumento" />
+            <End Role="Docente" EntitySet="Docente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Docente_Usuario" Association="Self.FK_Docente_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Docente" EntitySet="Docente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Docente_UsuarioCreacion" Association="Self.FK_Docente_UsuarioCreacion">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Docente" EntitySet="Docente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Docente_UsuarioModificacion" Association="Self.FK_Docente_UsuarioModificacion">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Docente" EntitySet="Docente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Experiencia_Docente" Association="Self.FK_Experiencia_Docente">
+            <End Role="Docente" EntitySet="Docente" />
+            <End Role="ExperienciaLaboral" EntitySet="ExperienciaLaboral" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Titulo_Docente" Association="Self.FK_Titulo_Docente">
+            <End Role="Docente" EntitySet="Docente" />
+            <End Role="Titulo" EntitySet="Titulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Experiencia_UsuarioCreacion" Association="Self.FK_Experiencia_UsuarioCreacion">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="ExperienciaLaboral" EntitySet="ExperienciaLaboral" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Experiencia_UsuarioModificacion" Association="Self.FK_Experiencia_UsuarioModificacion">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="ExperienciaLaboral" EntitySet="ExperienciaLaboral" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PasswordRecoveryTokens_Usuario" Association="Self.FK_PasswordRecoveryTokens_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="PasswordRecoveryTokens" EntitySet="PasswordRecoveryTokens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Perfil" Association="Self.FK_Usuario_Perfil">
+            <End Role="Perfil" EntitySet="Perfil" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Titulo_UsuarioCreacion" Association="Self.FK_Titulo_UsuarioCreacion">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Titulo" EntitySet="Titulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Titulo_UsuarioModificacion" Association="Self.FK_Titulo_UsuarioModificacion">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Titulo" EntitySet="Titulo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Trabajo_Aplicativo_Gestion_DocentesModelStoreContainer" CdmEntityContainer="Trabajo_Aplicativo_Gestion_DocentesEntities">
+          <EntitySetMapping Name="Carrera">
+            <EntityTypeMapping TypeName="Trabajo_Aplicativo_Gestion_DocentesModel.Carrera">
+              <MappingFragment StoreEntitySet="Carrera">
+                <ScalarProperty Name="IdCarrera" ColumnName="IdCarrera" />
+                <ScalarProperty Name="NombreCarrera" ColumnName="NombreCarrera" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Curso">
+            <EntityTypeMapping TypeName="Trabajo_Aplicativo_Gestion_DocentesModel.Curso">
+              <MappingFragment StoreEntitySet="Curso">
+                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+                <ScalarProperty Name="IdCarrera" ColumnName="IdCarrera" />
+                <ScalarProperty Name="NombreCurso" ColumnName="NombreCurso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Curso_Dictado">
+            <EntityTypeMapping TypeName="Trabajo_Aplicativo_Gestion_DocentesModel.Curso_Dictado">
+              <MappingFragment StoreEntitySet="Curso_Dictado">
+                <ScalarProperty Name="IdCursoDictado" ColumnName="IdCursoDictado" />
+                <ScalarProperty Name="IdDocente" ColumnName="IdDocente" />
+                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+                <ScalarProperty Name="IdEliminado" ColumnName="IdEliminado" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departamento">
+            <EntityTypeMapping TypeName="Trabajo_Aplicativo_Gestion_DocentesModel.Departamento">
+              <MappingFragment StoreEntitySet="Departamento">
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="NombreDepartamento" ColumnName="NombreDepartamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Distrito">
+            <EntityTypeMapping TypeName="Trabajo_Aplicativo_Gestion_DocentesModel.Distrito">
+              <MappingFragment StoreEntitySet="Distrito">
+                <ScalarProperty Name="IdDistrito" ColumnName="IdDistrito" />
+                <ScalarProperty Name="NombreDistrito" ColumnName="NombreDistrito" />
+                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Docente">
+            <EntityTypeMapping TypeName="Trabajo_Aplicativo_Gestion_DocentesModel.Docente">
+              <MappingFragment StoreEntitySet="Docente">
+                <ScalarProperty Name="IdDocente" ColumnName="IdDocente" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdTipoDocumento" ColumnName="IdTipoDocumento" />
+                <ScalarProperty Name="NumeroDocumento" ColumnName="NumeroDocumento" />
+                <ScalarProperty Name="IdGenero" ColumnName="IdGenero" />
+                <ScalarProperty Name="IdEstadoCivil" ColumnName="IdEstadoCivil" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+                <ScalarProperty Name="IdDistrito" ColumnName="IdDistrito" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="CostoHora" ColumnName="CostoHora" />
+                <ScalarProperty Name="IdEliminado" ColumnName="IdEliminado" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadoCivil">
+            <EntityTypeMapping TypeName="Trabajo_Aplicativo_Gestion_DocentesModel.EstadoCivil">
+              <MappingFragment StoreEntitySet="EstadoCivil">
+                <ScalarProperty Name="IdEstadoCivil" ColumnName="IdEstadoCivil" />
+                <ScalarProperty Name="TipoEstadoCivil" ColumnName="TipoEstadoCivil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExperienciaLaboral">
+            <EntityTypeMapping TypeName="Trabajo_Aplicativo_Gestion_DocentesModel.ExperienciaLaboral">
+              <MappingFragment StoreEntitySet="ExperienciaLaboral">
+                <ScalarProperty Name="IdExperiencia" ColumnName="IdExperiencia" />
+                <ScalarProperty Name="IdDocente" ColumnName="IdDocente" />
+                <ScalarProperty Name="Empresa" ColumnName="Empresa" />
+                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="Certificado" ColumnName="Certificado" />
+                <ScalarProperty Name="IdEliminado" ColumnName="IdEliminado" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genero">
+            <EntityTypeMapping TypeName="Trabajo_Aplicativo_Gestion_DocentesModel.Genero">
+              <MappingFragment StoreEntitySet="Genero">
+                <ScalarProperty Name="IdGenero" ColumnName="IdGenero" />
+                <ScalarProperty Name="TipoGenero" ColumnName="TipoGenero" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PasswordRecoveryTokens">
+            <EntityTypeMapping TypeName="Trabajo_Aplicativo_Gestion_DocentesModel.PasswordRecoveryTokens">
+              <MappingFragment StoreEntitySet="PasswordRecoveryTokens">
+                <ScalarProperty Name="IdToken" ColumnName="IdToken" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="FechaExpiracion" ColumnName="FechaExpiracion" />
+                <ScalarProperty Name="Usado" ColumnName="Usado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Perfil">
+            <EntityTypeMapping TypeName="Trabajo_Aplicativo_Gestion_DocentesModel.Perfil">
+              <MappingFragment StoreEntitySet="Perfil">
+                <ScalarProperty Name="IdPerfil" ColumnName="IdPerfil" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Provincia">
+            <EntityTypeMapping TypeName="Trabajo_Aplicativo_Gestion_DocentesModel.Provincia">
+              <MappingFragment StoreEntitySet="Provincia">
+                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+                <ScalarProperty Name="NombreProvincia" ColumnName="NombreProvincia" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoDocumento">
+            <EntityTypeMapping TypeName="Trabajo_Aplicativo_Gestion_DocentesModel.TipoDocumento">
+              <MappingFragment StoreEntitySet="TipoDocumento">
+                <ScalarProperty Name="IdTipoDocumento" ColumnName="IdTipoDocumento" />
+                <ScalarProperty Name="Abreviatura" ColumnName="Abreviatura" />
+                <ScalarProperty Name="NombreTipoDocumento" ColumnName="NombreTipoDocumento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Titulo">
+            <EntityTypeMapping TypeName="Trabajo_Aplicativo_Gestion_DocentesModel.Titulo">
+              <MappingFragment StoreEntitySet="Titulo">
+                <ScalarProperty Name="IdTitulo" ColumnName="IdTitulo" />
+                <ScalarProperty Name="IdDocente" ColumnName="IdDocente" />
+                <ScalarProperty Name="GradoObtenido" ColumnName="GradoObtenido" />
+                <ScalarProperty Name="CentroEstudios" ColumnName="CentroEstudios" />
+                <ScalarProperty Name="AnoGraduacion" ColumnName="AnoGraduacion" />
+                <ScalarProperty Name="ImagenTitulo" ColumnName="ImagenTitulo" />
+                <ScalarProperty Name="IdEliminado" ColumnName="IdEliminado" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="Trabajo_Aplicativo_Gestion_DocentesModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Usuario1" ColumnName="Usuario" />
+                <ScalarProperty Name="ContrasenaHash" ColumnName="ContrasenaHash" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdPerfil" ColumnName="IdPerfil" />
+                <ScalarProperty Name="IdEliminado" ColumnName="IdEliminado" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

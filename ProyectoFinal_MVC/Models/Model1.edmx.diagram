@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f36c6a1398644d88b2b1963d60e84224" Name="Diagram1">
+        <EntityTypeShape EntityType="Trabajo_Aplicativo_Gestion_DocentesModel.Carrera" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Trabajo_Aplicativo_Gestion_DocentesModel.Curso" Width="1.5" PointX="7.5" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Trabajo_Aplicativo_Gestion_DocentesModel.Curso_Dictado" Width="1.5" PointX="9.75" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Trabajo_Aplicativo_Gestion_DocentesModel.Departamento" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Trabajo_Aplicativo_Gestion_DocentesModel.Distrito" Width="1.5" PointX="5.25" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="Trabajo_Aplicativo_Gestion_DocentesModel.Docente" Width="1.5" PointX="7.5" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Trabajo_Aplicativo_Gestion_DocentesModel.EstadoCivil" Width="1.5" PointX="5.25" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Trabajo_Aplicativo_Gestion_DocentesModel.ExperienciaLaboral" Width="1.5" PointX="12.75" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Trabajo_Aplicativo_Gestion_DocentesModel.Genero" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Trabajo_Aplicativo_Gestion_DocentesModel.PasswordRecoveryTokens" Width="1.5" PointX="7.5" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Trabajo_Aplicativo_Gestion_DocentesModel.Perfil" Width="1.5" PointX="3" PointY="21" IsExpanded="true" />
+        <EntityTypeShape EntityType="Trabajo_Aplicativo_Gestion_DocentesModel.Provincia" Width="1.5" PointX="3" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Trabajo_Aplicativo_Gestion_DocentesModel.TipoDocumento" Width="1.5" PointX="5.25" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Trabajo_Aplicativo_Gestion_DocentesModel.Titulo" Width="1.5" PointX="9.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Trabajo_Aplicativo_Gestion_DocentesModel.Usuario" Width="1.5" PointX="5.25" PointY="19.125" IsExpanded="true" />
+        <AssociationConnector Association="Trabajo_Aplicativo_Gestion_DocentesModel.FK_Curso_Carrera" ManuallyRouted="false" />
+        <AssociationConnector Association="Trabajo_Aplicativo_Gestion_DocentesModel.FK_CursoDictado_Curso" ManuallyRouted="false" />
+        <AssociationConnector Association="Trabajo_Aplicativo_Gestion_DocentesModel.FK_CursoDictado_Docente" ManuallyRouted="false" />
+        <AssociationConnector Association="Trabajo_Aplicativo_Gestion_DocentesModel.FK_CursoDictado_UsuarioCreacion" ManuallyRouted="false" />
+        <AssociationConnector Association="Trabajo_Aplicativo_Gestion_DocentesModel.FK_CursoDictado_UsuarioModificacion" ManuallyRouted="false" />
+        <AssociationConnector Association="Trabajo_Aplicativo_Gestion_DocentesModel.FK_Docente_Departamento" ManuallyRouted="false" />
+        <AssociationConnector Association="Trabajo_Aplicativo_Gestion_DocentesModel.FK_Provincia_Departamento" ManuallyRouted="false" />
+        <AssociationConnector Association="Trabajo_Aplicativo_Gestion_DocentesModel.FK_Distrito_Provincia" ManuallyRouted="false" />
+        <AssociationConnector Association="Trabajo_Aplicativo_Gestion_DocentesModel.FK_Docente_Distrito" ManuallyRouted="false" />
+        <AssociationConnector Association="Trabajo_Aplicativo_Gestion_DocentesModel.FK_Docente_EstadoCivil" ManuallyRouted="false" />
+        <AssociationConnector Association="Trabajo_Aplicativo_Gestion_DocentesModel.FK_Docente_Genero" ManuallyRouted="false" />
+        <AssociationConnector Association="Trabajo_Aplicativo_Gestion_DocentesModel.FK_Docente_Provincia" ManuallyRouted="false" />
+        <AssociationConnector Association="Trabajo_Aplicativo_Gestion_DocentesModel.FK_Docente_TipoDocumento" ManuallyRouted="false" />
+        <AssociationConnector Association="Trabajo_Aplicativo_Gestion_DocentesModel.FK_Docente_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="Trabajo_Aplicativo_Gestion_DocentesModel.FK_Docente_UsuarioCreacion" ManuallyRouted="false" />
+        <AssociationConnector Association="Trabajo_Aplicativo_Gestion_DocentesModel.FK_Docente_UsuarioModificacion" ManuallyRouted="false" />
+        <AssociationConnector Association="Trabajo_Aplicativo_Gestion_DocentesModel.FK_Experiencia_Docente" ManuallyRouted="false" />
+        <AssociationConnector Association="Trabajo_Aplicativo_Gestion_DocentesModel.FK_Titulo_Docente" ManuallyRouted="false" />
+        <AssociationConnector Association="Trabajo_Aplicativo_Gestion_DocentesModel.FK_Experiencia_UsuarioCreacion" ManuallyRouted="false" />
+        <AssociationConnector Association="Trabajo_Aplicativo_Gestion_DocentesModel.FK_Experiencia_UsuarioModificacion" ManuallyRouted="false" />
+        <AssociationConnector Association="Trabajo_Aplicativo_Gestion_DocentesModel.FK_PasswordRecoveryTokens_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="Trabajo_Aplicativo_Gestion_DocentesModel.FK_Usuario_Perfil" ManuallyRouted="false" />
+        <AssociationConnector Association="Trabajo_Aplicativo_Gestion_DocentesModel.FK_Titulo_UsuarioCreacion" ManuallyRouted="false" />
+        <AssociationConnector Association="Trabajo_Aplicativo_Gestion_DocentesModel.FK_Titulo_UsuarioModificacion" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
