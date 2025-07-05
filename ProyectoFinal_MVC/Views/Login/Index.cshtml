@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Login (JSON)";
+}
+
+<h2>Iniciar Sesión</h2>
+<div id="respuesta"></div>
+<form id="loginForm">
+    <label>Usuario: <input type="text" name="usuario" /></label><br />
+    <label>Contraseña: <input type="password" name="contrasena" /></label><br />
+    <button type="submit">Ingresar</button>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$("#loginForm").submit(function(e) {
+    e.preventDefault();
+    $.ajax({
+        url: '@Url.Action("Autenticar", "Login")',
+        method: 'POST',
+        data: $(this).serialize(),
+        success: function(resp) {
+            if(resp.exito) {
+                $("#respuesta").html('<span style="color:green;">' + resp.mensaje + '</span>');
+                // Redireccionar si es necesario
+                window.location.href = '/Home/blablabla';
+            } else {
+                $("#respuesta").html('<span style="color:red;">' + resp.mensaje + '</span>');
+            }
+        }
+    });
+});
+</script>
